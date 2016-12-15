@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+   >
+
+    <item android:id="@+id/menu_coordination"
+        android:title="coordination"
+        android:orderInCategory="200"
+
+        />
+    <item android:id="@+id/menu_navigation"
+        android:title="navigation"
+        android:orderInCategory="200"
+
+        />
+    <item android:id="@+id/menu_mixed"
+        android:title="mixed vegitable"
+        android:orderInCategory="200"
+        />
+
+</menu>
