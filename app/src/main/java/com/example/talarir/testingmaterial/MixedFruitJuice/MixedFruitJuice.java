@@ -1,6 +1,14 @@
 package com.example.talarir.testingmaterial.MixedFruitJuice;
 
+import android.app.ActionBar;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Color;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Handler;
+import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
@@ -15,10 +23,12 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.graphics.Palette;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -35,21 +45,29 @@ import layout.FragmentsList.FragmentOne;
 import layout.FragmentsList.FragmentThree;
 import layout.FragmentsList.FragmentTwo;
 
+
+
 public class MixedFruitJuice extends AppCompatActivity {
 
     Toolbar toolbar;
     ViewPager viewPager;
     TabLayout tabLayout;
 
+    CollapsingToolbarLayout collapsingToolbarLayout;
+
     private NavigationView navigationView;
     private DrawerLayout drawer;
     private View navHeader;
-    private ImageView imgNavHeaderBg, imgProfile;
+    private ImageView imgNavHeaderBg, imgProfile,collapsingImage;
     private TextView txtName, txtWebsite;
     private FloatingActionButton fab;
 
     public static int urlNavHeaderBg=R.drawable.main;
     public static int urlProfileImg=R.drawable.messi;
+    public static int oneone=R.drawable.oneone;
+    public static int twotwo=R.drawable.twotwo;
+    public static int threethree=R.drawable.threethree;
+
 
     // index to identify current nav menu item
     public static int navItemIndex = 0;
@@ -66,10 +84,20 @@ public class MixedFruitJuice extends AppCompatActivity {
     private boolean shouldLoadHomeFragOnBackPress = true;
     private Handler mHandler;
 
+    //map bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.android);
+
+    //Drawable myDrawable = getResources().getDrawable(R.drawable.android);
+    //Bitmap bitmap = ((BitmapDrawable) myDrawable).getBitmap();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //getWindow().requestFeature(Window.FEATURE_ACTION_BAR_OVERLAY);
         setContentView(R.layout.activity_mixed_fruit_juice);
+
+        collapsingToolbarLayout=(CollapsingToolbarLayout)findViewById(R.id.htab_collapse_toolbar);
+        collapsingToolbarLayout.setTitleEnabled(false);
+        collapsingImage=(ImageView)findViewById(R.id.htab_header);
 
         toolbar=(Toolbar)findViewById(R.id.toolbarMFJ);
         setSupportActionBar(toolbar);
@@ -77,6 +105,7 @@ public class MixedFruitJuice extends AppCompatActivity {
         mHandler = new Handler();
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
 
         viewPager=(ViewPager)findViewById(R.id.viewpagerMFJ);
         setupViewPager(viewPager);
@@ -101,13 +130,13 @@ public class MixedFruitJuice extends AppCompatActivity {
         // load toolbar titles from string resources
         activityTitles = getResources().getStringArray(R.array.nav_item_activity_titles);
 
-        fab.setOnClickListener(new View.OnClickListener() {
+        /*.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
             }
-        });
+        });*/
 
         // load nav menu header data
         loadNavHeader();
@@ -122,7 +151,22 @@ public class MixedFruitJuice extends AppCompatActivity {
         }
 
 
+
+        Bitmap image = BitmapFactory.decodeResource(getResources(),
+                R.drawable.collapsing_image);
+        Palette.from(image).generate(new Palette.PaletteAsyncListener() {
+            public void onGenerated(Palette palette) {
+                Palette.Swatch vibrantSwatch = palette.getVibrantSwatch();
+                if (vibrantSwatch != null) {
+                    int vibrantColor = palette.getVibrantColor(getResources().getColor(R.color.colorPrimary,null));
+                    int vibrantDarkColor = palette.getDarkVibrantColor(getResources().getColor(R.color.colorPrimaryDark,null));
+                    collapsingToolbarLayout.setContentScrimColor(vibrantColor);
+                    collapsingToolbarLayout.setStatusBarScrimColor(vibrantDarkColor);
+                }
+            }
+        });
     }
+
 
     private void loadHomeFragment() {
         // selecting appropriate nav menu item
@@ -137,7 +181,6 @@ public class MixedFruitJuice extends AppCompatActivity {
             drawer.closeDrawers();
 
             // show or hide the fab button
-
 
 
             toggleFab();
@@ -303,17 +346,17 @@ public class MixedFruitJuice extends AppCompatActivity {
     private void setUpCustomTabIcons()
     {
         TextView tabText1=(TextView) LayoutInflater.from(this).inflate(R.layout.custom_tablayout_mfj,null);
-        tabText1.setText("ONE");
-        tabText1.setCompoundDrawablesWithIntrinsicBounds(0,R.mipmap.ic_one,0,0);
+        //tabText1.setText("ONE");
+       tabText1.setCompoundDrawablesWithIntrinsicBounds(0,R.mipmap.ic_one,0,0);
         tabLayout.getTabAt(0).setCustomView(tabText1);
 
         TextView tabText2=(TextView) LayoutInflater.from(this).inflate(R.layout.custom_tablayout_mfj,null);
-        tabText2.setText("TWO");
+       // tabText2.setText("TWO");
         tabText2.setCompoundDrawablesWithIntrinsicBounds(0,R.mipmap.ic_two,0,0);
         tabLayout.getTabAt(1).setCustomView(tabText2);
 
         TextView tabText3=(TextView) LayoutInflater.from(this).inflate(R.layout.custom_tablayout_mfj,null);
-        tabText3.setText("THREE");
+        //tabText3.setText("THREE");
         tabText3.setCompoundDrawablesWithIntrinsicBounds(0,R.mipmap.ic_three,0,0);
         tabLayout.getTabAt(2).setCustomView(tabText3);
 
