@@ -16,12 +16,12 @@
             android:layout_height="match_parent"
             android:fitsSystemWindows="true"
             app:contentScrim="?attr/colorPrimary"
-            app:layout_scrollFlags="scroll|exitUntilCollapsed">
+            app:layout_scrollFlags="scroll|enterAlways|enterAlwaysCollapsed">
             <ImageView
                 android:id="@+id/htab_header"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@drawable/collapsing_image"
+                android:background="@drawable/android"
                 android:fitsSystemWindows="true"
                 android:scaleType="centerCrop"
                 app:layout_collapseMode="parallax" />
@@ -33,11 +33,15 @@
                 android:minHeight="?attr/actionBarSize"
                 app:layout_collapseMode="pin"
                 app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-                app:titleMarginTop="13dp" />
+                app:titleMarginTop="13dp"
+                app:layout_scrollFlags="scroll|enterAlways"
+                />
             <android.support.design.widget.TabLayout
                 android:id="@+id/tabsMFJ"
                 android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
+                android:layout_height="@dimen/custom_tab_layout_height"
+                app:tabIndicatorHeight="1dp"
+                android:layout_margin="2dp"
                 android:layout_gravity="bottom"
                 app:tabIndicatorColor="@android:color/white" />
         </android.support.design.widget.CollapsingToolbarLayout>
@@ -55,6 +59,7 @@
         android:layout_gravity="bottom|end"
         android:layout_margin="@dimen/fab_margin"
         app:backgroundTint="@color/colorPrimary"
-        app:layout_behavior="com.example.talarir.testingmaterial.MixedFruitJuice.FAB_Float_on_Scroll"
-        app:srcCompat="@android:drawable/ic_dialog_email" />
+        app:srcCompat="@android:drawable/ic_dialog_email"
+        app:borderWidth="0dp"
+        app:layout_behavior="com.example.talarir.testingmaterial.MixedFruitJuice.FABScrollBehavior"/>
 </android.support.design.widget.CoordinatorLayout>

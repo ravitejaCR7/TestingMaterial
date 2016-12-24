@@ -130,13 +130,13 @@ public class MixedFruitJuice extends AppCompatActivity {
         // load toolbar titles from string resources
         activityTitles = getResources().getStringArray(R.array.nav_item_activity_titles);
 
-        /*.setOnClickListener(new View.OnClickListener() {
+        fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
             }
-        });*/
+        });
 
         // load nav menu header data
         loadNavHeader();
@@ -153,7 +153,7 @@ public class MixedFruitJuice extends AppCompatActivity {
 
 
         Bitmap image = BitmapFactory.decodeResource(getResources(),
-                R.drawable.collapsing_image);
+                R.drawable.android);
         Palette.from(image).generate(new Palette.PaletteAsyncListener() {
             public void onGenerated(Palette palette) {
                 Palette.Swatch vibrantSwatch = palette.getVibrantSwatch();
